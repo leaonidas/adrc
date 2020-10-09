@@ -9,6 +9,7 @@ FILE *fp;
 int main(){
 
 	int tailID = 0, headID = 0, type = 0;
+	int option=0;
 
 	Graph* graph=allocateGraph();
 
@@ -26,6 +27,32 @@ int main(){
 	
 	printGraph(graph);
 
+	while(option!=5){
+
+		printf("Select the algorithm:\n\n");
+		printf("1- connected\n");
+		printf("2- biconnected\n");
+		printf("3- commercially acyclic\n");
+		printf("4- commercially connected\n");
+		printf("5- exit");
+		printf("\n");
+
+		scanf("%d", &option);
+
+		if(option==1){
+
+		}
+		else if(option==2){
+			
+		}
+		else if(option==3){
+			
+		}
+		else if(option==4){
+			
+		}
+	}
+	
 	return 0;
 	
 }
