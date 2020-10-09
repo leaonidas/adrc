@@ -1,7 +1,7 @@
 
 #include "graph.h"
 
-#define N 5
+#define N 11
 
 Graph* allocateGraph(){
 
@@ -25,7 +25,7 @@ void addNode(Graph* graph, int tail, int head, int type){ //we are adding the ne
     node->next=aux;
 
     node->type=type;
-    node->head=head;
+    node->head=head-1;
 }
 
 void printGraph(Graph* graph){
@@ -35,7 +35,7 @@ void printGraph(Graph* graph){
 
     for(i=0;i<N;i++){
         if(graph->nodes[i]!=NULL){
-            printf("Node %d -> %d(%d)", i+1, graph->nodes[i]->head, graph->nodes[i]->type);
+            printf("Node %d -> %d(%d)", i, graph->nodes[i]->head, graph->nodes[i]->type);
             aux=graph->nodes[i];
             while(aux->next!=NULL){
                 aux=aux->next;

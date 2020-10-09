@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "graph.h"
+#include "biconnected.h"
 
 FILE *fp;
 
@@ -15,7 +15,7 @@ int main(){
 
 	/*Opens and reads file that contains the graph
 	If it's unable to find the file gives a warning and exits the program*/
-	fp = fopen("ex.txt", "r");
+	fp = fopen("exbiconnected.txt", "r");
 	if(fp != NULL){
 		while(fscanf(fp, "%d %d %d", &tailID, &headID, &type) != EOF){
 			addNode(graph, tailID, headID, type);
@@ -34,22 +34,27 @@ int main(){
 		printf("2- biconnected\n");
 		printf("3- commercially acyclic\n");
 		printf("4- commercially connected\n");
-		printf("5- exit");
+		printf("5- exit\n");
 		printf("\n");
 
 		scanf("%d", &option);
+		printf("\n");
+
 
 		if(option==1){
 
 		}
 		else if(option==2){
-			
+			isBiconnected(graph);
 		}
 		else if(option==3){
 			
 		}
 		else if(option==4){
 			
+		}
+		else if(option!=5){
+			printf("Invalid input\n\n");
 		}
 	}
 	
