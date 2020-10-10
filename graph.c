@@ -45,3 +45,20 @@ void printGraph(Graph* graph){
         }
     }
 }
+
+void freetheGraph(Graph* graph, int graph_vector_size){
+    int i;
+    Node *aux, *aux2, *target;
+
+    for(i=0; i < graph_vector_size; i++){
+        target = graph->nodes[i]; //apontar para o primeiro nó de cada lista de nós
+        aux = target;
+        while(aux != NULL){ //percorrer essa respectiva lista enquanto se faz free das alocações do nó anterior
+            aux2 = aux;
+            aux = aux->next;
+            free(aux2);
+        }
+        free(target); //dar free do primeiro nó de cada lista
+    }
+    free(graph); //dar free da estrutura do graph   
+}

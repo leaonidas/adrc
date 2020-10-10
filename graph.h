@@ -16,4 +16,5 @@ typedef struct
 Graph* allocateGraph();
 void addNode(Graph* graph, int head, int tail, int type);
 void printGraph(Graph* graph);
+void freetheGraph(Graph* graph, int graph_vector_size);
 
