@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "biconnected.h"
 
@@ -9,13 +10,18 @@ FILE *fp;
 int main(){
 
 	int tailID = 0, headID = 0, type = 0;
-	int option=0;
+	//int option=0;
+	char file, option;
 
 	Graph* graph=allocateGraph();
 
+	printf("Insert file name:\n");
+	scanf("%s", &file);
+
+	//exbiconnected.txt
 	/*Opens and reads file that contains the graph
 	If it's unable to find the file gives a warning and exits the program*/
-	fp = fopen("exbiconnected.txt", "r");
+	fp = fopen(&file, "r");
 	if(fp != NULL){
 		while(fscanf(fp, "%d %d %d", &tailID, &headID, &type) != EOF){
 			addNode(graph, tailID, headID, type);
@@ -27,7 +33,7 @@ int main(){
 	
 	printGraph(graph);
 
-	while(option!=5){
+	while(strcmp(&option,"5")!=0){
 
 		printf("Select the algorithm:\n\n");
 		printf("1- connected\n");
@@ -37,23 +43,23 @@ int main(){
 		printf("5- exit\n");
 		printf("\n");
 
-		scanf("%d", &option);
+		scanf("%s", &option);
 		printf("\n");
 
 
-		if(option==1){
+		if(strcmp(&option,"1")==0){
 
 		}
-		else if(option==2){
+		else if(strcmp(&option,"2")==0){
 			isBiconnected(graph);
 		}
-		else if(option==3){
+		else if(strcmp(&option,"3")==0){
 			
 		}
-		else if(option==4){
+		else if(strcmp(&option,"4")==0){
 			
 		}
-		else if(option!=5){
+		else if(strcmp(&option,"5")!=0){
 			printf("Invalid input\n\n");
 		}
 	}
