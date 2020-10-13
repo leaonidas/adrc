@@ -18,7 +18,7 @@ void addNode(Graph* graph, int tail, int head, int type){ //we are adding the ne
     
     Node* aux = NULL;
     
-    Node* node = (Node*)malloc(sizeof(Node));
+    Node* node = (Node*)malloc(N*sizeof(Node));
     
     aux=graph->nodes[tail-1];    //aux fica com a primeira posição||
     graph->nodes[tail-1]=node;  //adicionar o novo nó na head do 
@@ -47,18 +47,29 @@ void printGraph(Graph* graph){
 }
 
 void freetheGraph(Graph* graph, int graph_vector_size){
-    int i;
-    Node *aux, *aux2, *target;
+    int i = 0;
+    int reset = 1;
+    Node *aux, *target;
 
     for(i=0; i < graph_vector_size; i++){
-        target = graph->nodes[i]; //apontar para o primeiro nó de cada lista de nós
-        aux = target;
-        while(aux != NULL){ //percorrer essa respectiva lista enquanto se faz free das alocações do nó anterior
-            aux2 = aux;
-            aux = aux->next;
-            free(aux2);
+        if (reset == 1) //caso estejamos a analisar 1 nova lista
+        {
+            target = graph->nodes[i]; //apontar para o primeiro nó de cada lista de nós
+            reset = 0; //disable the reset flag
         }
-        free(target); //dar free do primeiro nó de cada lista
+
+        if (target != NULL) //IF List notempty -> PROCESS IT
+        {
+            while(target != NULL){ //percorrer essa respectiva lista enquanto se faz free das alocações do nó anterior
+                aux = target->next;
+                free(target);
+                target = aux;
+            }
+            reset = 1; //since we are going to check another index of the vector
+        }
+        else{ //we should prepare the reset to process the next vector index
+            reset = 1;
+        }
     }
     free(graph); //dar free da estrutura do graph   
 }
