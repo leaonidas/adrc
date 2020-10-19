@@ -8,5 +8,5 @@
 
 
 void isBiconnected(Graph* graph);
-void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[], int time);
+void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[]);
 void DFS(Graph* graph, int n, int visited[]);
