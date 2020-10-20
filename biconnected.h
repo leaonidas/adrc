@@ -1,9 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "graph.h"
 
-#define N 11
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 
 

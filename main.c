@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "biconnected.h"
+#include "cyclic.h"
 
 FILE *fp;
 
@@ -54,7 +55,7 @@ int main(){
 			isBiconnected(graph);
 		}
 		else if(strcmp(&option,"3")==0){
-			
+			commercialyCyclic(graph);
 		}
 		else if(strcmp(&option,"4")==0){
 			

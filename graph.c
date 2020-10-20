@@ -1,7 +1,6 @@
 
 #include "graph.h"
 
-#define N 11
 
 Graph* allocateGraph(){
 
