@@ -25,6 +25,11 @@ void addNode(Graph* graph, int tail, int head, int type){ //we are adding the ne
 
     node->type=type;
     node->head=head-1;
+
+    if(tail>graph->n){
+        graph->n=tail;
+    }
+
 }
 
 void printGraph(Graph* graph){
@@ -45,12 +50,12 @@ void printGraph(Graph* graph){
     }
 }
 
-void freetheGraph(Graph* graph, int graph_vector_size){
+void freeGraph(Graph* graph){
     int i = 0;
     int reset = 1;
     Node *aux, *target;
 
-    for(i=0; i < graph_vector_size; i++){
+    for(i=0; i < graph->n; i++){
         if (reset == 1) //caso estejamos a analisar 1 nova lista
         {
             target = graph->nodes[i]; //apontar para o primeiro nó de cada lista de nós

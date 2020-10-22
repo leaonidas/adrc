@@ -2,6 +2,8 @@
 
 int time=0;
 int bi=1;
+int edge1=-1;
+int edge2=-1;
 
 void isBiconnected(Graph* graph){
 
@@ -20,9 +22,6 @@ void isBiconnected(Graph* graph){
 		pred[i]=-1;
 	}
 
-	//start algorithm in node 1
-	//DFS(graph, 0, visited);
-
 	//root is node 1
 	artPoints(graph, 0, visited, d, l, pred);
 
@@ -30,7 +29,8 @@ void isBiconnected(Graph* graph){
 		printf("Graph is biconnected\n");
 	}
 	else{
-		printf("Graph is NOT biconnected\n\n\n");
+		printf("Graph is NOT biconnected\n");
+		printf("Bridge %d-%d\n\n\n", edge1, edge2);
 	}
 
 	//for(i=0;i<N;i++){
@@ -67,7 +67,9 @@ void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[])
 			l[n]=MIN(l[n], l[aux->head]);
 			//check if edge is bridge
 			if(l[aux->head]>d[n]){
-				printf("edge %d-%d is bridge\n", aux->head+1, n+1);
+				//printf("edge %d-%d is bridge\n", aux->head+1, n+1);
+				edge1=aux->head+1;
+				edge2=n+1;
 			}
 		}
 		//back edge
@@ -97,7 +99,9 @@ void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[])
 
 				//check if edge is bridge
 				if(l[aux->head]>d[n]){
-					printf("edge %d-%d is bridge\n", aux->head+1, n+1);
+					//printf("edge %d-%d is bridge\n", aux->head+1, n+1);
+					edge1=aux->head+1;
+					edge2=n+1;
 				}
 			}
 			//back edge
@@ -110,7 +114,7 @@ void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[])
 
 
 
-
+//graph, no raiz, vetor visited
 void DFS(Graph* graph, int n, int visited[]){
 
 	Node* aux;

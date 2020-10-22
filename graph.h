@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 #ifndef N
-#define N 5
+#define N 65535
 #endif
 
 #ifndef GRAPH_H
@@ -17,11 +17,12 @@ typedef struct node
 typedef struct
 {
 	Node* nodes[65535]; //lista de listas ou vector de lista
+	int n;
 }Graph;
 
 Graph* allocateGraph();
 void addNode(Graph* graph, int head, int tail, int type);
 void printGraph(Graph* graph);
-void freetheGraph(Graph* graph, int graph_vector_size);
+void freeGraph(Graph* graph);
 #endif
 

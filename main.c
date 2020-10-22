@@ -8,21 +8,25 @@
 FILE *fp;
 
 /*neste ficheiro devemos ter apenas a leitura do ficheiro e a invocação dos algoritmos*/
-int main(){
+int main(int argc, char *argv[]){
 
 	int tailID = 0, headID = 0, type = 0;
 	//int option=0;
-	char file, option;
+	char file[30], option;
+
+	if(argc<2) exit(0);
+
+	strcpy(file, argv[1]);
 
 	Graph* graph=allocateGraph();
 
-	printf("Insert file name:\n");
-	scanf("%s", &file);
+	//printf("Insert file name:\n");
+	//scanf("%s", &file);
 
 	//exbiconnected.txt
 	/*Opens and reads file that contains the graph
 	If it's unable to find the file gives a warning and exits the program*/
-	fp = fopen(&file, "r");
+	fp = fopen(file, "r");
 	if(fp != NULL){
 		while(fscanf(fp, "%d %d %d", &tailID, &headID, &type) != EOF){
 			addNode(graph, tailID, headID, type);
@@ -30,13 +34,16 @@ int main(){
 		fclose(fp);
 	}else{
 		printf("Unable to open file!\n");
+		exit(1);
 	}
+
+	printf("%d nós \n\n", graph->n);
 	
 	printGraph(graph);
 
 	while(strcmp(&option,"5")!=0){
 
-		printf("Select the algorithm:\n\n");
+		printf("\nSelect the algorithm:\n\n");
 		printf("1- connected\n");
 		printf("2- biconnected\n");
 		printf("3- commercially acyclic\n");
@@ -64,8 +71,9 @@ int main(){
 			printf("Invalid input\n\n");
 		}
 	}
+
+	freeGraph(graph);
 	
 	return 0;
-	
 }
 
