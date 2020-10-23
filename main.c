@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
 
 	printf("%d nós \n\n", graph->n);
 	
-	printGraph(graph);
+	//printGraph(graph);
 
 	while(strcmp(&option,"5")!=0){
 

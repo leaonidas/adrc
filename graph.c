@@ -39,11 +39,11 @@ void printGraph(Graph* graph){
 
     for(i=0;i<N;i++){
         if(graph->nodes[i]!=NULL){
-            printf("Node %d -> %d(%d)", i, graph->nodes[i]->head, graph->nodes[i]->type);
+            printf("Node %d -> %d(%d)", i+1, graph->nodes[i]->head+1, graph->nodes[i]->type);
             aux=graph->nodes[i];
             while(aux->next!=NULL){
                 aux=aux->next;
-                printf(", %d(%d)", aux->head, aux->type);
+                printf(", %d(%d)", aux->head+1, aux->type);
             }
             printf("\n");
         }

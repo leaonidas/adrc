@@ -61,7 +61,7 @@ void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[])
 			artPoints(graph, aux->head, visited, d, l, pred);
 			//check if n is an articulation point
 			if(l[aux->head]>=d[n]){
-				//printf("%d is an articulation point\n",n);
+				printf("%d is an articulation point\n",n+1);
 				bi=0;
 			}
 			l[n]=MIN(l[n], l[aux->head]);
@@ -83,7 +83,7 @@ void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[])
 			if(visited[aux->head]==0){
 				//if is root and second child
 				if(n==0){
-					//printf("%d is an articulation point\n",n);
+					printf("%d is an articulation point\n",n+1);
 					bi=0;
 				}
 				pred[aux->head]=n;
@@ -91,7 +91,7 @@ void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[])
 
 				//check if n is an articulation point
 				if(l[aux->head]>=d[n]){
-					//printf("%d is an articulation point\n",n);
+					printf("%d is an articulation point\n",n+1);
 					bi=0;
 				}
 
