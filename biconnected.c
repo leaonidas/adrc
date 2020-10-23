@@ -4,6 +4,7 @@ int time=0;
 int bi=1;
 int edge1=-1;
 int edge2=-1;
+int rootSons=0;
 
 void isBiconnected(Graph* graph){
 
@@ -29,8 +30,14 @@ void isBiconnected(Graph* graph){
 		printf("Graph is biconnected\n");
 	}
 	else{
-		printf("Graph is NOT biconnected\n");
-		printf("Bridge %d-%d\n\n\n", edge1, edge2);
+		printf("Graph is not biconnected\n");
+		if(edge1!=-1){
+			printf("Bridge %d-%d\n\n\n", edge1+1, edge2+1);
+		}
+		else{
+			printf("No bridges\n\n\n");
+		}
+		
 	}
 
 	//for(i=0;i<N;i++){
@@ -40,6 +47,8 @@ void isBiconnected(Graph* graph){
 
 	return;
 }
+
+
 
 void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[]){
 
@@ -54,44 +63,24 @@ void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[])
 	//printf("%d, ", n);
 	//printf("%d\n", time);
 	
-	if(aux->next!=NULL){
+	while(aux!=NULL){
 		
 		if(visited[aux->head]==0){
-			pred[aux->head]=n;
-			artPoints(graph, aux->head, visited, d, l, pred);
-			//check if n is an articulation point
-			if(l[aux->head]>=d[n]){
-				printf("%d is an articulation point\n",n+1);
-				bi=0;
-			}
-			l[n]=MIN(l[n], l[aux->head]);
-			//check if edge is bridge
-			if(l[aux->head]>d[n]){
-				//printf("edge %d-%d is bridge\n", aux->head+1, n+1);
-				edge1=aux->head+1;
-				edge2=n+1;
-			}
-		}
-		//back edge
-		else if (aux->head!=pred[n]){
-			l[n]=MIN(l[n], d[aux->head]);
-		}
-		
-        while(aux->next!=NULL){
-            aux=aux->next;
-
-			if(visited[aux->head]==0){
 				//if is root and second child
 				if(n==0){
-					printf("%d is an articulation point\n",n+1);
-					bi=0;
+					rootSons++;
+					if(rootSons==2){
+						//printf("%d is an articulation point\n",n+1);
+						bi=0;
+					}
 				}
 				pred[aux->head]=n;
 				artPoints(graph, aux->head, visited, d, l, pred);
 
 				//check if n is an articulation point
-				if(l[aux->head]>=d[n]){
-					printf("%d is an articulation point\n",n+1);
+				if(l[aux->head]>=d[n] && n!=0){
+					//printf("%d is an articulation point\n",n+1);
+					//printf("aqui\n");
 					bi=0;
 				}
 
@@ -100,17 +89,20 @@ void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[])
 				//check if edge is bridge
 				if(l[aux->head]>d[n]){
 					//printf("edge %d-%d is bridge\n", aux->head+1, n+1);
-					edge1=aux->head+1;
-					edge2=n+1;
+					edge1=aux->head;
+					edge2=n;
 				}
 			}
 			//back edge
 			else if (aux->head!=pred[n]){
 				l[n]=MIN(l[n], d[aux->head]);
-			}	
-        }
-    }
+			}
+
+		aux=aux->next;
+	}
+
 }
+
 
 
 

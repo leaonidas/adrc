@@ -72,7 +72,7 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	freeGraph(graph);
+	//freeGraph(graph);
 	
 	return 0;
 }
