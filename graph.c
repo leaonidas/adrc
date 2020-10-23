@@ -9,11 +9,18 @@ Graph* allocateGraph(){
     return graph;
 }
 
+int* allocateVisited(){
+
+    int* visited = (int*)malloc(N*sizeof(int));
+    
+    return visited;
+}
+
 
 /*Cada posição do vector vai apresentar apenas os seus "vizinhos"
 a procura do nó será feita por índice*/
 
-void addNode(Graph* graph, int tail, int head, int type){ //we are adding the new nodes in the beginning of the list!!!
+void addNode(Graph* graph, int tail, int head, int type, int* visited){ //we are adding the new nodes in the beginning of the list!!!
     
     Node* aux = NULL;
     
@@ -25,6 +32,7 @@ void addNode(Graph* graph, int tail, int head, int type){ //we are adding the ne
 
     node->type=type;
     node->head=head-1;
+    visited[node->head] = -1;
 
     if(tail>graph->n){
         graph->n=tail;

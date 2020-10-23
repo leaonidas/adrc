@@ -1,17 +1,15 @@
 #include "connected.h"
 
-void isConnected(Graph* graph){ //returns true if connected
+void isConnected(Graph* graph, int* visited){ //returns true if connected
 
-	bool visited[N]; //has the info about the lrdy visited nodes
 	int root_index = 0; //0 set as the top root by default
-	int created_nodes_counter = 4;
 
 	visit_neighbors_DFS(graph, visited, root_index);
 	//AFTER PROCESSING THE DFS and VISITED ALL NODES
 
-	for(int i = 0; i < created_nodes_counter; i++)
+	for(int i = 0; i < N; i++)
 	{
-		if(visited[i] == false){
+		if(visited[i] == -1){
 			printf("the graph is NOT CONNECTED\n\n");
 			return;
 		}
@@ -20,16 +18,16 @@ void isConnected(Graph* graph){ //returns true if connected
 	return;
 }
 
-void visit_neighbors_DFS(Graph* graph, bool visited[], int target_index){
+void visit_neighbors_DFS(Graph* graph, int* visited, int target_index){
 
 	Node* aux = graph->nodes[target_index]; //gets the first linked
+	visited[target_index] = 1; //visit this node
 
 	while(aux != NULL){
-		visit_neighbors_DFS(graph,visited,aux->head);//recursive method to be applied in the target_node neighbors
+		if(visited[aux->head] == -1)
+			visit_neighbors_DFS(graph,visited,aux->head);//recursive method to be applied in the target_node neighbors
 		aux = aux->next;
 	}
-
-	visited[target_index] = true;	
 
 	return;
 }

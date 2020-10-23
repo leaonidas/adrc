@@ -4,6 +4,7 @@
 
 #include "biconnected.h"
 #include "cyclic.h"
+#include "connected.h"
 
 FILE *fp;
 
@@ -13,12 +14,14 @@ int main(int argc, char *argv[]){
 	int tailID = 0, headID = 0, type = 0;
 	//int option=0;
 	char file[30], option;
+	int* visited = NULL;
 
 	if(argc<2) exit(0);
 
 	strcpy(file, argv[1]);
 
 	Graph* graph=allocateGraph();
+	visited = allocateVisited();
 
 	//printf("Insert file name:\n");
 	//scanf("%s", &file);
@@ -29,7 +32,7 @@ int main(int argc, char *argv[]){
 	fp = fopen(file, "r");
 	if(fp != NULL){
 		while(fscanf(fp, "%d %d %d", &tailID, &headID, &type) != EOF){
-			addNode(graph, tailID, headID, type);
+			addNode(graph, tailID, headID, type, visited);
 		}
 		fclose(fp);
 	}else{
@@ -56,7 +59,7 @@ int main(int argc, char *argv[]){
 
 
 		if(strcmp(&option,"1")==0){
-
+			isConnected(graph, visited);
 		}
 		else if(strcmp(&option,"2")==0){
 			isBiconnected(graph);
