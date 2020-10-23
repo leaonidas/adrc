@@ -20,14 +20,14 @@ int* allocateVisited(){
 /*Cada posição do vector vai apresentar apenas os seus "vizinhos"
 a procura do nó será feita por índice*/
 
-void addNode(Graph* graph, int tail, int head, int type, int* visited){ //we are adding the new nodes in the beginning of the list!!!
+void addNode(Graph* graph, int tail, int head, int type, int* visited){ /*we are adding the new nodes in the beginning of the list!!!*/
     
     Node* aux = NULL;
     
     Node* node = (Node*)malloc(N*sizeof(Node));
     
-    aux=graph->nodes[tail-1];    //aux fica com a primeira posição||
-    graph->nodes[tail-1]=node;  //adicionar o novo nó na head do 
+    aux=graph->nodes[tail-1];    /*aux fica com a primeira posição||*/
+    graph->nodes[tail-1]=node;  /*adicionar o novo nó na head do*/
     node->next=aux;
 
     node->type=type;
@@ -64,24 +64,24 @@ void freeGraph(Graph* graph){
     Node *aux, *target;
 
     for(i=0; i < graph->n; i++){
-        if (reset == 1) //caso estejamos a analisar 1 nova lista
+        if (reset == 1) /*caso estejamos a analisar 1 nova lista*/
         {
-            target = graph->nodes[i]; //apontar para o primeiro nó de cada lista de nós
-            reset = 0; //disable the reset flag
+            target = graph->nodes[i]; /*apontar para o primeiro nó de cada lista de nós*/
+            reset = 0; /*disable the reset flag*/
         }
 
-        if (target != NULL) //IF List notempty -> PROCESS IT
+        if (target != NULL) /*IF List notempty -> PROCESS IT*/
         {
-            while(target != NULL){ //percorrer essa respectiva lista enquanto se faz free das alocações do nó anterior
+            while(target != NULL){ /*percorrer essa respectiva lista enquanto se faz free das alocações do nó anterior*/
                 aux = target->next;
                 free(target);
                 target = aux;
             }
-            reset = 1; //since we are going to check another index of the vector
+            reset = 1; /*since we are going to check another index of the vector*/
         }
-        else{ //we should prepare the reset to process the next vector index
+        else{ /*we should prepare the reset to process the next vector index*/
             reset = 1;
         }
     }
-    free(graph); //dar free da estrutura do graph   
+    free(graph); /*dar free da estrutura do graph*/
 }

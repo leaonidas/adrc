@@ -23,7 +23,7 @@ void isBiconnected(Graph* graph){
 		pred[i]=-1;
 	}
 
-	//root is node 1
+	/*root is node 1*/
 	artPoints(graph, 0, visited, d, l, pred);
 
 	if(bi==1){
@@ -40,10 +40,10 @@ void isBiconnected(Graph* graph){
 		
 	}
 
-	//for(i=0;i<N;i++){
+	/*for(i=0;i<N;i++){
 	//	printf("%d ", d[i]);
 	//	printf("%d\n", l[i]);
-	//}
+	//}*/
 
 	return;
 }
@@ -60,40 +60,40 @@ void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[])
 	d[n]=time;
 	l[n]=d[n];
 	
-	//printf("%d, ", n);
-	//printf("%d\n", time);
+	/*printf("%d, ", n);*/
+	/*printf("%d\n", time);*/
 	
 	while(aux!=NULL){
 		
 		if(visited[aux->head]==0){
-				//if is root and second child
+				/*if is root and second child*/
 				if(n==0){
 					rootSons++;
 					if(rootSons==2){
-						//printf("%d is an articulation point\n",n+1);
+						/*printf("%d is an articulation point\n",n+1);*/
 						bi=0;
 					}
 				}
 				pred[aux->head]=n;
 				artPoints(graph, aux->head, visited, d, l, pred);
 
-				//check if n is an articulation point
+				/*check if n is an articulation point*/
 				if(l[aux->head]>=d[n] && n!=0){
-					//printf("%d is an articulation point\n",n+1);
-					//printf("aqui\n");
+					/*printf("%d is an articulation point\n",n+1);*/
+					/*printf("aqui\n");*/
 					bi=0;
 				}
 
 				l[n]=MIN(l[n], l[aux->head]);
 
-				//check if edge is bridge
+				/*check if edge is bridge*/
 				if(l[aux->head]>d[n]){
-					//printf("edge %d-%d is bridge\n", aux->head+1, n+1);
+					/*printf("edge %d-%d is bridge\n", aux->head+1, n+1);*/
 					edge1=aux->head;
 					edge2=n;
 				}
 			}
-			//back edge
+			/*back edge*/
 			else if (aux->head!=pred[n]){
 				l[n]=MIN(l[n], d[aux->head]);
 			}
@@ -106,7 +106,7 @@ void artPoints(Graph* graph, int n, int visited[], int d[], int l[], int pred[])
 
 
 
-//graph, no raiz, vetor visited
+/*graph, no raiz, vetor visited*/
 void DFS(Graph* graph, int n, int visited[]){
 
 	Node* aux;

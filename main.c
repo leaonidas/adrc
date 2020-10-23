@@ -12,21 +12,22 @@ FILE *fp;
 int main(int argc, char *argv[]){
 
 	int tailID = 0, headID = 0, type = 0;
-	//int option=0;
+	/*int option=0;*/
 	char file[30], option;
 	int* visited = NULL;
+	Graph* graph = NULL;
 
 	if(argc<2) exit(0);
 
 	strcpy(file, argv[1]);
 
-	Graph* graph=allocateGraph();
+	graph=allocateGraph();
 	visited = allocateVisited();
 
-	//printf("Insert file name:\n");
-	//scanf("%s", &file);
+	/*printf("Insert file name:\n");*/
+	/*scanf("%s", &file);*/
 
-	//exbiconnected.txt
+	/*exbiconnected.txt*/
 	/*Opens and reads file that contains the graph
 	If it's unable to find the file gives a warning and exits the program*/
 	fp = fopen(file, "r");
@@ -42,7 +43,7 @@ int main(int argc, char *argv[]){
 
 	printf("%d nós \n\n", graph->n);
 	
-	//printGraph(graph);
+	/*printGraph(graph);*/
 
 	while(strcmp(&option,"5")!=0){
 
@@ -75,7 +76,7 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	//freeGraph(graph);
+	/*freeGraph(graph);*/
 	
 	return 0;
 }

@@ -16,7 +16,7 @@ typedef struct node
 
 typedef struct
 {
-	Node* nodes[65535]; //lista de listas ou vector de lista
+	Node* nodes[65535]; /*lista de listas ou vector de lista*/
 	int n;
 }Graph;
 
