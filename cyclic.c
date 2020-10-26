@@ -2,7 +2,7 @@
 
 void commercialyCyclic(Graph* graph){
     int visited[N];
-    int i, j;
+    int i;
 
     /*Establish all nodes as not visited*/
     for(i=0; i<N; i++){
@@ -41,25 +41,30 @@ bool DFSComm(Graph* graph, int n, int visited[], int prev){
             /*runs DFS on neighbour node recursivelly*/
             prev = n;
             if(DFSComm(graph, aux->head, visited, prev)){
-                /*debugMsg("I am stuck 1\n");*/
                 printf(" %d", aux->head+1);
                 return true;
             }
         }
         /*if the node is visited and different to the previous node*/
-        else if(aux->head != prev && aux->type == 1){
-            /*debugMsg("I am stuck 2\n");*/
+        else if(aux->head != prev && aux->type == 1 && finalNode(aux)){
             printf("Nodes in cycle: %d", aux->head+1);
             return true;
         }
-        /*debugMsg("I am stuck 3\n");*/
         aux = aux->next;
     }
-    /*debugMsg("I am stuck 4\n");*/
-    visited[n] = 0;
+    /*visited[n] = 0;*/
     return false;
 }
 
-void debugMsg(char *msg){
-    printf("DEBUG: %s\n", msg);
+bool finalNode(Node* node){
+    Node* aux;
+    aux = node;
+
+    while(aux != NULL){
+        if(aux->type == 1){
+            return true;
+        }
+        aux = aux->next;
+    }
+    return false;
 }
