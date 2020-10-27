@@ -2,16 +2,16 @@
 CC = gcc
 
 #  Compiler Flags
-CFLAGS = -o3 -Wall -ansi -pedantic
+CFLAGS = -g -o3 -Wall -ansi -pedantic
 
 #  Sources
-SOURCES =	graph.c	connected.c	biconnected.c	cyclic.c	main.c
+SOURCES =	graph.c	connected.c	biconnected.c	cyclic.c	commer_connected.c	main.c
 
 #  Objects
-OBJECTS =	graph.o	connected.o	biconnected.o	cyclic.o	main.o
+OBJECTS =	graph.o	connected.o	biconnected.o	cyclic.o	commer_connected.o	main.o
 
 program: $(OBJECTS)
-	gcc -o $@ $(OBJECTS)	-lm
+	gcc	-o $@ $(OBJECTS)	-lm
 	rm -f *.o *~
 
 graph.o:	graph.h
@@ -22,6 +22,7 @@ biconnected.o:	biconnected.h
 
 cyclic.o:	cyclic.h
 
+commer_connected.o:	commer_connected.h
 
 clean::
 	rm -f *.o core	a.out program	*~

@@ -5,6 +5,7 @@
 #include "biconnected.h"
 #include "cyclic.h"
 #include "connected.h"
+#include "commer_connected.h"
 
 FILE *fp;
 
@@ -69,7 +70,7 @@ int main(int argc, char *argv[]){
 			commercialyCyclic(graph);
 		}
 		else if(strcmp(&option,"4")==0){
-			
+			isCommercial_Connected(graph, visited);
 		}
 		else if(strcmp(&option,"5")!=0){
 			printf("Invalid input\n\n");
