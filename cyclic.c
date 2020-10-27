@@ -1,5 +1,7 @@
 #include "cyclic.h"
 
+int first=0;
+
 void commercialyCyclic(Graph* graph){
     int visited[N];
     int i;
@@ -12,7 +14,7 @@ void commercialyCyclic(Graph* graph){
     /*Run DFS in nodes not yet visited*/
     for(i=0; i<N; i++){
         if(visited[i]==0){
-            printf("nó inicial que visita: %d\n\n", i);
+            first=i;
             if(DFSComm(graph, i, visited, -1)){
                 printf(" %d", i+1);
                 printf("\n\n");
@@ -36,7 +38,6 @@ bool DFSComm(Graph* graph, int n, int visited[], int prev){
     /*goes through the nodes neighbours*/
     while (aux != NULL)
     {   /*verifies if the node has been visited*/
-        /*printf("Neighbour node: %d\n", aux->head);*/
         if(visited[aux->head] == 0 && aux->type == 1){
             /*runs DFS on neighbour node recursivelly*/
             prev = n;
@@ -46,22 +47,24 @@ bool DFSComm(Graph* graph, int n, int visited[], int prev){
             }
         }
         /*if the node is visited and different to the previous node*/
-        else if(aux->head != prev && aux->type == 1 && finalNode(aux)){
-            printf("Nodes in cycle: %d", aux->head+1);
-            return true;
+        else if(aux->head != prev && aux->type == 1){
+            if(finalNode(graph, aux->head)){
+                printf("Nodes in cycle: %d", aux->head+1);
+                return true;
+            }
+            return false;
         }
         aux = aux->next;
     }
-    /*visited[n] = 0;*/
     return false;
 }
 
-bool finalNode(Node* node){
+/*Verifies if final node has an exit to the first node in the cycle*/
+bool finalNode(Graph* graph, int n){
     Node* aux;
-    aux = node;
-
+    aux = graph->nodes[n];
     while(aux != NULL){
-        if(aux->type == 1){
+        if(aux->type == 1 && first == n){
             return true;
         }
         aux = aux->next;
