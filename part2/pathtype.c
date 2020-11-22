@@ -15,21 +15,23 @@ void pathType(Graph* graph, int src, int dest){
         dist[i] = inf; prev[i] = -1; visited[i] = false;
     }
     dist[src-1] = 0;
-    printf("Entering main loop!\n");
+    
     for(i = 0; i < graph->n; i++){
         visit = nextVisit(dist, visited, graph->n);
-        printf("tens de dar return\n");
-        printf("não curtes do visit: %d", visit);
         visited[visit] = true;
-
+        printf("Nó em que está: %d\n", visit);
         aux = graph->nodes[visit];
         while(aux != NULL){
-            if(!visited[visit] && (dist[visit] + 1) < dist[aux->head]){
+            if(!visited[aux->head] && (dist[visit] + 1) < dist[aux->head]){
                 dist[aux->head] = dist[visit] + 1;
                 prev[aux->head] = visit;
+                printf("Nó vizinho visitado: %d   Distância até ao nó: %d\n", aux->head, dist[aux->head]);
             }
+            aux = aux->next;
+            printf("\n\n");
         }
     }
+    printSolution(dist, prev, src, dest);
 
 }
 
@@ -40,17 +42,16 @@ int nextVisit(int* dist, bool* visited, int size){
             next=i; min = dist[i];
         }
     }
-    printf("antes do return: %d\n", next);
     return next;
 }
 
 void printSolution(int* dist, int* prev, int src, int dest){
-    int aux = dest;
+    int aux = dest-1;
     
-    printf("Shortest path cost: %d\n", dist[dest]);
+    printf("Shortest path cost: %d\n", dist[aux]);
     printf("Shortest path: %d", dest);
-    while(aux != src){
-        printf("-%d", prev[aux]);
+    while(aux != src-1){
+        printf("-%d", prev[aux]+1);
         aux=prev[aux];
     }
     printf("\n");
