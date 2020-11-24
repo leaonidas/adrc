@@ -19,22 +19,22 @@ void pathType(Graph* graph, int src, int dest){
     typePrev[src-1] = 0;
     
     for(i = 0; i < graph->n; i++){
-        visit = nextVisit(dist, visited, graph->n);
+        visit = nextVisit(dist, visited, typePrev, graph->n);
         if(visit == -1){
             printf("No commercial path found between nodes!\n");
             return;
         }
         visited[visit] = true;
-        printf("Nó em que está: %d\n", visit);
+        printf("Nó em que está: %d\n", visit + 1);
         aux = graph->nodes[visit];
         while(aux != NULL){
             if(!visited[aux->head] && (dist[visit] + 1) < dist[aux->head] && verifyComm(typePrev[visit], aux->type)){
                 dist[aux->head] = dist[visit] + 1;
                 prev[aux->head] = visit;
                 typePrev[aux->head] = aux->type;
-                printf("Nó vizinho visitado: %d   Distância até ao nó: %d\n", aux->head, dist[aux->head]);
+                printf("Nó vizinho visitado: %d   Distância até ao nó: %d\n", aux->head+1, dist[aux->head]);
                 if(aux->head == dest-1){
-                    printSolution(dist, prev, src, dest);
+                    printSolution(dist, prev, typePrev, src, dest);
                     return;
                 }
             }
@@ -44,11 +44,11 @@ void pathType(Graph* graph, int src, int dest){
     }
 }
 
-int nextVisit(int* dist, bool* visited, int size){
-    int min = 70000, next = -1, i = 0;
+int nextVisit(int* dist, bool* visited, int* typePrev, int size){
+    int min = 70000, next = -1, i = 0, priority = 4;
     for(i = 0; i < size; i++){
-        if(dist[i] < min && visited[i] == false){
-            next=i; min = dist[i];
+        if(dist[i] < min && visited[i] == false && typePrev[i] < priority){
+            next=i; min = dist[i]; priority = typePrev[i];
         }
     }
     return next;
@@ -69,14 +69,18 @@ bool verifyComm(int prevConn, int nextConn){
 }
 
 
-void printSolution(int* dist, int* prev, int src, int dest){
-    int aux = dest-1;
+void printSolution(int* dist, int* prev, int* typePrev, int src, int dest){
+    int aux = dest-1, second = 0; 
     
     printf("Shortest path cost: %d\n", dist[aux]);
     printf("Shortest path: %d", dest);
     while(aux != src-1){
         printf("-%d", prev[aux]+1);
+        second = aux;
         aux=prev[aux];
     }
     printf("\n");
+    if(typePrev[second] == 1) printf("Costumer path.\n");
+    else if(typePrev[second] == 2) printf("Peer path.\n");
+    else if(typePrev[second] == 3) printf("Provider path.\n");
 }
