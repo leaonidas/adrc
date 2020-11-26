@@ -25,5 +25,6 @@ void addNode(Graph* graph, int head, int tail, int type, int* visited);
 int* allocateVisited();
 void printGraph(Graph* graph);
 void freeGraph(Graph* graph);
+void totalCount_typePaths(int*, int*, int*, int);
 #endif
 
