@@ -54,8 +54,7 @@ int main(int argc, char *argv[]){
 
 		printf("\nSelect the algorithm:\n\n");
 		printf("1- Type of BGP path\n");
-		printf("2- Length of BGP path\n");
-		printf("3- commercially acyclic\n");
+		printf("2- Length of shortest BGP path\n");
 		printf("4- exit\n");
 		printf("\n");
 
@@ -67,10 +66,7 @@ int main(int argc, char *argv[]){
 			pathType(graph, src, dest);
 		}
 		else if(strcmp(&option,"2")==0){
-			printf("developing...\n");
-		}
-		else if(strcmp(&option,"3")==0){
-			printf("developing...\n");
+			shortestPath(graph, src, dest);
 		}
 		else if(strcmp(&option,"4")!=0){
 			printf("Invalid input\n\n");
