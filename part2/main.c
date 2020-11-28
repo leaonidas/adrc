@@ -15,6 +15,9 @@ int main(int argc, char *argv[]){
 	char file[30], temp[5], option;
 	int* visited = NULL;
 	Graph* graph = NULL;
+	int totalCounter_c = 0;
+	int totalCounter_r = 0;
+	int totalCounter_p = 0;
 
 	if(argc<2) exit(0);
 
@@ -39,6 +42,7 @@ int main(int argc, char *argv[]){
 	if(fp != NULL){
 		while(fscanf(fp, "%d %d %d", &tailID, &headID, &type) != EOF){
 			addNode(graph, tailID, headID, type, visited);
+			totalCount_typePaths(&totalCounter_p, &totalCounter_r, &totalCounter_c, type);
 		}
 		fclose(fp);
 	}else{
@@ -49,6 +53,8 @@ int main(int argc, char *argv[]){
 	printf("%d nós \n\n", graph->n);
 	
 	printGraph(graph);
+
+	printf("\nC: %d\nR: %d\nP: %d\n", totalCounter_c, totalCounter_r, totalCounter_p);
 
 	while(strcmp(&option,"4")!=0){
 
@@ -78,3 +84,21 @@ int main(int argc, char *argv[]){
 	return 0;
 }
 
+void totalCount_typePaths(int* totalCounter_p, int* totalCounter_r, int* totalCounter_c, int type){
+    switch(type){
+
+        case 1://provider link
+            *totalCounter_p += 1;
+            break;
+
+        case 2: //peer link
+            *totalCounter_r +=1;
+            break;
+
+        case 3: //customer link
+            *totalCounter_c += 1;
+            break;
+            
+    }
+    return;
+}
