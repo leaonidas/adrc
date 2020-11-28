@@ -61,7 +61,7 @@ int main(int argc, char *argv[]){
 		printf("\nSelect the algorithm:\n\n");
 		printf("1- Type of BGP path\n");
 		printf("2- Length of shortest BGP path\n");
-		printf("4- exit\n");
+		printf("3- exit\n");
 		printf("\n");
 
 		scanf("%s", &option);
@@ -74,7 +74,7 @@ int main(int argc, char *argv[]){
 		else if(strcmp(&option,"2")==0){
 			shortestPath(graph, src, dest);
 		}
-		else if(strcmp(&option,"4")!=0){
+		else if(strcmp(&option,"3")!=0){
 			printf("Invalid input\n\n");
 		}
 	}
